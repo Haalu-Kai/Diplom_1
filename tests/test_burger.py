@@ -15,13 +15,11 @@ class TestBurger:
         self.sauce = Ingredient(INGREDIENT_TYPE_SAUCE, "hot sauce", 100)
         self.filling = Ingredient(INGREDIENT_TYPE_FILLING, "cutlet", 200)
 
-    # --- set_buns ---
 
     def test_set_buns_sets_bun(self):
         self.burger.set_buns(self.bun)
         assert self.burger.bun == self.bun
 
-    # --- add_ingredient ---
 
     def test_add_ingredient_adds_to_list(self):
         self.burger.add_ingredient(self.sauce)
@@ -32,7 +30,6 @@ class TestBurger:
         self.burger.add_ingredient(self.filling)
         assert len(self.burger.ingredients) == 2
 
-    # --- remove_ingredient ---
 
     def test_remove_ingredient_removes_from_list(self):
         self.burger.add_ingredient(self.sauce)
@@ -45,7 +42,6 @@ class TestBurger:
         self.burger.remove_ingredient(0)
         assert self.burger.ingredients == [self.filling]
 
-    # --- move_ingredient ---
 
     def test_move_ingredient_changes_order(self):
         self.burger.add_ingredient(self.sauce)
@@ -61,18 +57,15 @@ class TestBurger:
         assert self.burger.ingredients[0] == self.filling
         assert self.burger.ingredients[1] == self.sauce
 
-    # --- get_price ---
 
     def test_get_price_only_bun(self):
         self.burger.set_buns(self.bun)
-        # bun price * 2 = 100 * 2 = 200
         assert self.burger.get_price() == 200
 
     def test_get_price_with_ingredients(self):
         self.burger.set_buns(self.bun)
         self.burger.add_ingredient(self.sauce)
         self.burger.add_ingredient(self.filling)
-        # 100*2 + 100 + 200 = 500
         assert self.burger.get_price() == 500
 
     def test_get_price_uses_mock_bun(self):
@@ -81,7 +74,6 @@ class TestBurger:
         self.burger.set_buns(mock_bun)
         assert self.burger.get_price() == 100
 
-    # --- get_receipt ---
 
     def test_get_receipt_contains_bun_name(self):
         self.burger.set_buns(self.bun)
@@ -110,7 +102,7 @@ class TestBurger:
         receipt = self.burger.get_receipt()
         lines = receipt.split('\n')
         assert lines[0] == '(==== black bun ====)'
-        assert '(==== black bun ====)' in lines[1]
+        assert lines[1] == '(==== black bun ====)'
 
     def test_get_receipt_format_with_ingredients(self):
         self.burger.set_buns(self.bun)
